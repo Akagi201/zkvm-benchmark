@@ -85,6 +85,7 @@ dry-run Rust and zkGo version fibonacci wasm program on zkWasm.
 ```sh
 cd zkwasm/fib
 just build
-just dry-run-go
+just opt
 just dry-run-rust
+just dry-run-go
 ```
