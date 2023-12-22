@@ -1,7 +1,0 @@
-# Bypasses the time-consuming proof generation process
-dry-run:
-  RISC0_DEV_MODE=1 cargo run --release --features metal
-
-# Real Proof Generation
-full-prove:
-  RISC0_DEV_MODE=0 cargo run --release --features metal

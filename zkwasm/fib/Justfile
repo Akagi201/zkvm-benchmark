@@ -1,4 +1,4 @@
-wasm := "./fib_opt.wasm"
+wasm := "./fib.wasm"
 args := "-k 22 --function zkmain --param ./params --output ./output --wasm " + wasm
 cli := env_var_or_default("DELPHINUS_CLI", "delphinus-cli")
 

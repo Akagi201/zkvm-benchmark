@@ -4,5 +4,8 @@
 
 ```sh
 cd fib
-./run_with_input.sh
+just -l
+just build
+just run-wasi
+just dry-run
 ```
