@@ -16,3 +16,4 @@ Cargo.lock
 *.dat
 /zkwasm/fib/output
 /zkwasm/fib/params
+*.wat
