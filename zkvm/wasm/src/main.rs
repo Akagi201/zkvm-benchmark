@@ -3,17 +3,23 @@ use std::{fs::File, io::Read};
 use risc0_zkvm::{default_prover, ExecutorEnv};
 use wasm_methods::{WASM_INTERP_ELF, WASM_INTERP_ID};
 
+#[allow(dead_code)]
 fn wat2wasm(wat: &str) -> Result<Vec<u8>, wat::Error> {
     wat::parse_str(wat)
 }
 
 fn run_guest() {
-    let file_path = "./fib.wat";
+    let file_path = "./fib.wasm";
     let mut file = File::open(file_path).unwrap();
-    let mut wat = String::new();
-    file.read_to_string(&mut wat).unwrap();
+    let file_size = file.metadata().unwrap().len() as usize;
+    let mut wasm = Vec::with_capacity(file_size);
+    file.read_to_end(&mut wasm).unwrap();
 
-    let wasm = wat2wasm(&wat).expect("Failed to parse_str");
+    // let file_path = "./fib.wat";
+    // let mut wat = String::new();
+    // file.read_to_string(&mut wat).unwrap();
+
+    // let wasm = wat2wasm(&wat).expect("Failed to parse_str");
 
     let env = ExecutorEnv::builder()
         .write(&wasm)

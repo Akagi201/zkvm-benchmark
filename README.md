@@ -7,7 +7,6 @@ Benchmarks between zkWasm and zkVM
 ```sh
 cd zkvm/wasm
 just build
-just wat
 just dry-run
 ```
 
@@ -16,4 +15,12 @@ cd zkwasm/fib
 just build
 just run-wasi
 just dry-run
+```
+
+## Benchmark
+
+Install [hyperfine](https://github.com/sharkdp/hyperfine) first.
+
+```sh
+brew install hyperfine
 ```
