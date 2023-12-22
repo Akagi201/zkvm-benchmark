@@ -9,6 +9,7 @@ opt:
 # copy wasm to zkvm folder
 copy:
 	cp ./pkg/fib_bg_opt.wasm ../../zkvm/wasm
+	cp ./pkg/fib_bg_opt.wasm ../../zkwasm/fib
 
 # clean artifacts
 clean:

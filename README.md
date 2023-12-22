@@ -28,7 +28,7 @@ Tested on my Mac Studio M1 Max
 
 ## Test manually
 
-Build rust version fibonacci wasm program, and copy to zkVM folder.
+Build rust version fibonacci wasm program, and copy to zkVM/zkWasm folder.
 
 ```sh
 cd rust/fib-wasm
@@ -37,7 +37,7 @@ just opt
 just copy
 ```
 
-dry-run Rust and Go version fibonacci wasm program on zkVM.
+dry-run Rust and zkGo version fibonacci wasm program on zkVM.
 
 ```sh
 cd zkvm/wasm
@@ -47,11 +47,11 @@ just dry-run-rust
 just dry-run-go
 ```
 
-dry-run Go version fibonacci wasm program on zkWasm.
+dry-run Rust and zkGo version fibonacci wasm program on zkWasm.
 
 ```sh
 cd zkwasm/fib
 just build
-just run-wasi
-just dry-run
+just dry-run-go
+just dry-run-rust
 ```

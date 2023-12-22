@@ -1,5 +1,6 @@
-wasm := "./fib_opt.wasm"
-args := "-k 22 --function zkmain --param ./params --output ./output --wasm " + wasm
+wasm_go := "./fib_opt.wasm"
+wasm_rust := "./fib_bg_opt.wasm"
+args := "-k 22 --function zkmain --param ./params --output ./output --wasm"
 cli := env_var_or_default("DELPHINUS_CLI", "delphinus-cli")
 
 # build wasm
@@ -12,24 +13,28 @@ opt:
 
 # run with wasi
 run-wasi:
-  node ../zkwasm-emulator/wasi_exec_node.js {{wasm}} /dev/null
+  node ../zkwasm-emulator/wasi_exec_node.js {{wasm_go}} /dev/null
 
-# dry run
-dry-run:
-  RUST_LOG=info {{cli}} {{args}} dry-run
+# dry run go
+dry-run-go:
+  RUST_LOG=info {{cli}} {{args}} {{wasm_go}} dry-run
+
+# dry run rust
+dry-run-rust:
+  RUST_LOG=info {{cli}} {{args}} {{wasm_rust}} dry-run
 
 # setup params
 setup:
   rm -rf output
-  RUST_LOG=info {{cli}} {{args}} setup
+  RUST_LOG=info {{cli}} {{args}} {{wasm_go}} setup
 
 # generate proof
 prove:
-  RUST_LOG=info {{cli}} {{args}} single-prove
+  RUST_LOG=info {{cli}} {{args}} {{wasm_go}}  single-prove
 
 # verify proof
 verify:
-  RUST_LOG=info {{cli}} {{args}} single-verify
+  RUST_LOG=info {{cli}} {{args}} {{wasm_go}} single-verify
 
 # clean artifacts
 clean:
