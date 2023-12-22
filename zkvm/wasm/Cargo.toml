@@ -1,12 +1,13 @@
 [package]
-name = "hello-world"
+name = "wasm"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-hello-world-methods = { path = "methods" }
 risc0-zkvm = "0.19.1"
 serde = "1.0.193"
+wasm-methods = { path = "methods" }
+wat = "1.0.71"
 
 [features]
 default = []

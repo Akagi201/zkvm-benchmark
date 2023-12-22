@@ -6,6 +6,10 @@ fn main() {
     let (receipt, _) = multiply(17, 23);
 
     // Here is where one would send 'receipt' over the network...
+    println!(
+        "receipt journal(public output): {:?}",
+        receipt.journal.decode::<u64>().unwrap()
+    );
 
     // Verify receipt, panic if it's wrong
     receipt.verify(MULTIPLY_ID).expect(

@@ -1,3 +1,4 @@
+#[doc = include_str!("../README.md")]
 use hello_world_methods::MULTIPLY_ELF;
 use risc0_zkvm::{default_prover, ExecutorEnv, Receipt};
 
@@ -42,7 +43,7 @@ mod tests {
     fn test_hello_world() {
         const TEST_FACTOR_ONE: u64 = 17;
         const TEST_FACTOR_TWO: u64 = 23;
-        let (_, result) = multiply(17, 23);
+        let (_, result) = multiply(TEST_FACTOR_ONE, TEST_FACTOR_TWO);
         assert_eq!(
             result,
             TEST_FACTOR_ONE * TEST_FACTOR_TWO,
