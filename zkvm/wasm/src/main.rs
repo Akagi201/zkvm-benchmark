@@ -1,7 +1,11 @@
 use std::{fs::File, io::Read};
 
+use clap::Parser;
 use risc0_zkvm::{default_prover, ExecutorEnv};
 use wasm_methods::{WASM_INTERP_ELF, WASM_INTERP_ID};
+
+mod cli;
+use cli::Cli;
 
 #[allow(dead_code)]
 fn wat2wasm(wat: &str) -> Result<Vec<u8>, wat::Error> {
@@ -9,7 +13,8 @@ fn wat2wasm(wat: &str) -> Result<Vec<u8>, wat::Error> {
 }
 
 fn run_guest() {
-    let file_path = "./fib.wasm";
+    let cli = Cli::parse();
+    let file_path = cli.wasm;
     let mut file = File::open(file_path).unwrap();
     let file_size = file.metadata().unwrap().len() as usize;
     let mut wasm = Vec::with_capacity(file_size);

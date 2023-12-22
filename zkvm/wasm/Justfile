@@ -3,9 +3,17 @@ build:
   GOOS=wasip1 GOARCH=wasm lgo build -gcflags=all=-d=softfloat -o fib.wasm fib.go
   cargo build --release
 
-# Bypasses the time-consuming proof generation process
-dry-run:
-  RISC0_DEV_MODE=1 ./target/release/wasm
+# wasm-opt wasm file
+opt:
+	wasm-opt -Oz -o ./fib_opt.wasm ./fib.wasm
+
+# dry-run go, bypasses the time-consuming proof generation process
+dry-run-go:
+  RISC0_DEV_MODE=1 ./target/release/wasm -w fib_opt.wasm
+
+# dry-run rust, bypasses the time-consuming proof generation process
+dry-run-rust:
+  RISC0_DEV_MODE=1 ./target/release/wasm -w fib_bg_opt.wasm
 
 # Real Proof Generation
 full-prove:

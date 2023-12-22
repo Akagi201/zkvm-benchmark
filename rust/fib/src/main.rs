@@ -25,7 +25,7 @@ fn fib_i64_mod(n: i64) -> i64 {
     let mut a: i64 = 0;
     let mut b: i64 = 1;
     for _ in 0..n {
-        let tmp: i64 = a as i64;
+        let tmp: i64 = a;
         a = b;
         b = (tmp + b) % (1<<32);
     }

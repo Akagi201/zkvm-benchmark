@@ -1,0 +1,15 @@
+# build wasm
+build:
+	wasm-pack build --release
+
+# wasm-opt wasm file
+opt:
+	wasm-opt -Oz -o ./pkg/fib_bg_opt.wasm ./pkg/fib_bg.wasm
+
+# copy wasm to zkvm folder
+copy:
+	cp ./pkg/fib_bg_opt.wasm ../../zkvm/wasm
+
+# clean artifacts
+clean:
+	rm -rf ./pkg
