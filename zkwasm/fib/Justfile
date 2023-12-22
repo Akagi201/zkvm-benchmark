@@ -1,0 +1,36 @@
+wasm := "./fib_opt.wasm"
+args := "-k 22 --function zkmain --param ./params --output ./output --wasm " + wasm
+cli := env_var_or_default("DELPHINUS_CLI", "delphinus-cli")
+
+# build wasm
+build:
+  GOOS=wasip1 GOARCH=wasm lgo build -gcflags=all=-d=softfloat -o fib.wasm fib.go
+
+# wasm-opt wasm file
+opt:
+  wasm-opt -Oz -o ./fib_opt.wasm ./fib.wasm
+
+# run with wasi
+run-wasi:
+  node ../zkwasm-emulator/wasi_exec_node.js {{wasm}} /dev/null
+
+# dry run
+dry-run:
+  RUST_LOG=info {{cli}} {{args}} dry-run
+
+# setup params
+setup:
+  rm -rf output
+  RUST_LOG=info {{cli}} {{args}} setup
+
+# generate proof
+prove:
+  RUST_LOG=info {{cli}} {{args}} single-prove
+
+# verify proof
+verify:
+  RUST_LOG=info {{cli}} {{args}} single-verify
+
+# clean artifacts
+clean:
+  rm -rf output params *.wasm *.json *.dat

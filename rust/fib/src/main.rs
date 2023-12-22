@@ -21,21 +21,21 @@ fn fib_iter(n: BigUint) -> BigUint {
     a
 }
 
-fn fib_i32_mod(n: i32) -> i32{
-    let mut a: i32 = 0;
-    let mut b: i32 = 1;
+fn fib_i64_mod(n: i64) -> i64 {
+    let mut a: i64 = 0;
+    let mut b: i64 = 1;
     for _ in 0..n {
         let tmp: i64 = a as i64;
         a = b;
-        b = ((tmp + (b as i64)) % (1<<31)) as i32;
+        b = (tmp + b) % (1<<32);
     }
     a
 }
 
 fn main() {
     println!("fib(100) = {}", fib_iter(BigUint::from(100_u32)));
-    println!("fib(100)%(1<<31) = {}", fib_iter(BigUint::from(100_u32)).to_u128().unwrap() % (1 << 31));
-    println!("fib_i32_mod(100) = {}", fib_i32_mod(100) % (1 << 31));
+    println!("fib(100)%(1<<32) = {}", fib_iter(BigUint::from(100_u32)).to_u128().unwrap() % (1 << 32));
+    println!("fib_i64_mod(100) = {}", fib_i64_mod(100_i64));
 }
 
 #[cfg(test)]

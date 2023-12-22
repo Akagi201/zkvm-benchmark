@@ -1,0 +1,43 @@
+wasm := "./fib_with_input.wasm"
+args := "-k 22 --function zkmain --param ./params --output ./output --wasm " + wasm
+input_args := "--public 0:i64 --public 1:i64 --public 3314859971:i64"
+cli := env_var_or_default("DELPHINUS_CLI", "delphinus-cli")
+
+# build wasm
+build:
+  GOOS=wasip1 GOARCH=wasm lgo build -gcflags=all=-d=softfloat -o fib_with_input.wasm fib_zkgo.go
+
+# wasm-opt wasm file
+opt:
+  wasm-opt -Oz -o ./fib_with_input_opt.wasm ./fib_with_input.wasm
+
+# write witness file
+write-witness:
+  echo 0 | python write_witness.py > input.dat
+  echo 1 | python write_witness.py >> input.dat
+  echo 3314859971 | python write_witness.py >> input.dat
+
+# run with wasi
+run-wasi:
+  node ../zkwasm-emulator/wasi_exec_node.js {{wasm}} input.dat
+
+# dry run
+dry-run:
+  RUST_LOG=info {{cli}} {{args}} dry-run {{input_args}} 
+
+# setup params
+setup:
+  rm -rf output
+  RUST_LOG=info {{cli}} {{args}} setup
+
+# generate proof
+prove:
+  RUST_LOG=info {{cli}} {{args}} single-prove {{input_args}} 
+
+# verify proof
+verify:
+  RUST_LOG=info {{cli}} {{args}} single-verify
+
+# clean artifacts
+clean:
+  rm -rf output params *.wasm *.json *.dat
