@@ -57,6 +57,7 @@ just dry-run
 
 Tested on my Mac Studio M1 Max
 
+![macos_profile](assets/macos_profile.jpg)
 ![zkvm_bench](assets/zkvm_bench.png)
 
 ## Test manually
