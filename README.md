@@ -28,12 +28,13 @@ rustup toolchain list --verbose | grep risc0
 ## Install zkGo compiler
 
 ```sh
-git clone https://github.com/ethstorage/go.git
+git clone -b zkGo https://github.com/ethstorage/go.git
 cd src
-./all.sh
+./all.bash
 # output src/bin
+cd ../bin
 mv go lgo
-# set src/bin to your $PATH env
+# set the bin/ directory to your $PATH env or just copy lgo to your PATH
 ```
 
 ## Install `delphinus-cli`
