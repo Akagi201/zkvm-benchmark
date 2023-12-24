@@ -10,7 +10,7 @@ Before running, make sure your have installed the following tools:
 * [hyperfine](https://github.com/sharkdp/hyperfine): a benchmarking tool
 * wasm-opt: from [binaryen](https://github.com/WebAssembly/binaryen), for wasm to wasm optimization.
 * delphinus-cli: from [zkWasm](https://github.com/DelphinusLab/zkWasm), to run zkWasm program, built from the latest main branch.
-* risczero toolchain: from [risc0](https://github.com/risc0/risc0), to build zkVM program, built from v1.19.1 tag.
+* risczero toolchain: from [risc0](https://github.com/risc0/risc0), to build zkVM program, built from v0.19.1 tag.
 * lgo: an alias of the `go` binary built from [zkgo](https://github.com/ethstorage/go/tree/zkGo), for build go program to wasm, built from the latest zkGo branch.
 
 ## Install risczero toolchain
