@@ -54,7 +54,7 @@ cd src
 # output src/bin
 cd ../bin
 mv go lgo
-export GOPATH="$PATH:your ethstorage go repo path"
+export GOROOT="$PATH:your ethstorage go repo path"
 # set the bin/ directory to your $PATH env or just copy lgo to your PATH
 ```
 
