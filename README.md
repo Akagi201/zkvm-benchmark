@@ -9,9 +9,29 @@ Before running, make sure your have installed the following tools:
 * [just](https://github.com/casey/just): a command runner
 * [hyperfine](https://github.com/sharkdp/hyperfine): a benchmarking tool
 * wasm-opt: from [binaryen](https://github.com/WebAssembly/binaryen), for wasm to wasm optimization.
+* [wasm-pack](https://github.com/rustwasm/wasm-pack): Rust → Wasm workflow tool
 * delphinus-cli: from [zkWasm](https://github.com/DelphinusLab/zkWasm), to run zkWasm program, built from the latest main branch.
 * risczero toolchain: from [risc0](https://github.com/risc0/risc0), to build zkVM program, built from v0.19.1 tag.
 * lgo: an alias of the `go` binary built from [zkgo](https://github.com/ethstorage/go/tree/zkGo), for build go program to wasm, built from the latest zkGo branch.
+
+```sh
+#just
+mkdir -p ~/bin
+curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | bash -s -- --to ~/bin
+export PATH="$PATH:$HOME/bin"
+# hyperfine
+wget https://github.com/sharkdp/hyperfine/releases/download/v1.16.1/hyperfine_1.16.1_amd64.deb
+sudo dpkg -i hyperfine_1.16.1_amd64.deb
+# wasm-opt
+curl -L -O https://github.com/WebAssembly/binaryen/releases/download/version_116/binaryen-version_116-x86_64-linux.tar.gz
+tar -xzf binaryen-version_116-x86_64-linux.tar.gz
+mv binaryen-version_116-x86_64-linux/bin/wasm-opt ~/bin
+# wasm-pack
+rustc install stable
+rustc default stable 
+cargo install wasm-pack
+export PATH="$PATH:$HOME/.cargo/bin"
+```
 
 ## Install risczero toolchain
 
@@ -34,6 +54,7 @@ cd src
 # output src/bin
 cd ../bin
 mv go lgo
+export GOPATH="$PATH:your ethstorage go repo path"
 # set the bin/ directory to your $PATH env or just copy lgo to your PATH
 ```
 
