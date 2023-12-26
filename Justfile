@@ -17,3 +17,7 @@ clean:
 # dry-run all with hyperfine
 dry-run:
   hyperfine -r 1 'just -f zkvm/wasm/Justfile dry-run-rust' 'just -f zkvm/wasm/Justfile dry-run-go' 'just -f zkwasm/fib/Justfile dry-run-go' 'just -f zkwasm/fib/Justfile dry-run-rust'
+
+# prove all with hyperfine
+prove:
+  hyperfine -r 1 'just -f zkvm/wasm/Justfile full-prove-rust'

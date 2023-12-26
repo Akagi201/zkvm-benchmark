@@ -75,12 +75,14 @@ Run Benchmarks with hyperfine.
 just clean # optional
 just build
 just dry-run
+just prove
 ```
 
 Tested on my Mac Studio M1 Max
 
 ![macos_profile](assets/macos_profile.jpg)
 ![zkvm_bench](assets/zkvm_bench.png)
+![zkvm_prove](assets/zkvm_prove.png)
 
 ## Test manually
 
@@ -101,6 +103,7 @@ just build
 just opt
 just dry-run-rust
 just dry-run-go
+just full-prove-rust
 ```
 
 dry-run Rust and zkGo version fibonacci wasm program on zkWasm.

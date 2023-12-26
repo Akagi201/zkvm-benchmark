@@ -36,7 +36,10 @@ fn run_guest() {
     let prover = default_prover();
 
     // Produce a receipt by proving the specified ELF binary.
-    let receipt = prover.prove_elf(env, WASM_INTERP_ELF).unwrap();
+    let receipt = match prover.prove_elf(env, WASM_INTERP_ELF) {
+        Ok(receipt) => receipt,
+        Err(e) => panic!("Failed to prove: {}", e),
+    };
 
     receipt.verify(WASM_INTERP_ID).expect(
         "Code you have proven should successfully verify; did you specify the correct image ID?",
