@@ -1,7 +1,7 @@
 # build wasm
 build:
   GOOS=wasip1 GOARCH=wasm lgo build -gcflags=all=-d=softfloat -o fib.wasm fib.go
-  cargo build --release
+  cargo build --release --features metal
 
 # wasm-opt wasm file
 opt:

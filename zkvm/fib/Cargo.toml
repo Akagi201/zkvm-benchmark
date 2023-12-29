@@ -1,0 +1,15 @@
+[package]
+name = "fib"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+hello-world-methods = { path = "methods" }
+risc0-zkvm = "0.19.1"
+serde = "1.0.193"
+
+[features]
+default = []
+cuda = ["risc0-zkvm/cuda"]
+metal = ["risc0-zkvm/metal"]
+prove = ["risc0-zkvm/prove"]
