@@ -4,12 +4,12 @@ build:
 
 # wasm-opt wasm file
 opt:
-	wasm-opt -Oz -o ./pkg/fib_bg_opt.wasm ./pkg/fib_bg.wasm
+	wasm-opt -Oz -o ./pkg/fib_wasm_bg_opt.wasm ./pkg/fib_wasm_bg.wasm
 
 # copy wasm to zkvm folder
 copy:
-	cp ./pkg/fib_bg_opt.wasm ../../zkvm/wasm
-	cp ./pkg/fib_bg_opt.wasm ../../zkwasm/fib
+	cp ./pkg/fib_wasm_bg_opt.wasm ../../zkvm/wasm
+	cp ./pkg/fib_wasm_bg_opt.wasm ../../zkwasm/fib
 
 # clean artifacts
 clean:

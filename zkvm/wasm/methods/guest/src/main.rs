@@ -10,24 +10,41 @@ pub fn main() {
     let engine = Engine::default();
 
     let wasm: Vec<u8> = env::read();
-    // let iters: i32 = env::read();
+    let pub_values: Vec<u64> = env::read();
 
-    // Derived from the wasmi example: https://docs.rs/wasmi/0.29.0/wasmi/#example
     let module = Module::new(&engine, &mut &wasm[..]).expect("Failed to create module");
-    type HostState = u32;
+    type HostState = Vec<u64>;
 
-    let linker = <Linker<HostState>>::new(&engine);
-    let mut store = Store::new(&engine, 42);
+    let mut store = Store::new(&engine, pub_values);
+    let require = Func::wrap(&mut store, |cond: u32| {
+        if cond == 0 {
+            panic!("require failed");
+        }
+    });
+    let wasm_input = Func::wrap(&mut store, |mut caller: Caller<'_, HostState>, is_public: u32| -> u64 {
+        if is_public != 1 {
+            panic!("Only public value is supported");
+        }
+
+        let host_state = caller.data_mut();
+        if let Some(value) = host_state.pop() {
+            value
+        } else {
+            panic!("No more values availabe in pub_values");
+        }
+    });
+    let mut linker = <Linker<HostState>>::new(&engine);
+    linker.define("env", "require", require).expect("Failed to define require function");
+    linker.define("env", "wasm_input", wasm_input).expect("Failed to define wasm_input function");
+
     let instance = linker
         .instantiate(&mut store, &module)
         .expect("failed to instantiate")
         .start(&mut store)
         .expect("Failed to start");
 
-    let fib = instance
+    let zkmain = instance
         .get_typed_func::<(), ()>(&store, "zkmain")
         .expect("Failed to get typed_func");
-    fib.call(&mut store, ()).expect("Failed to call");
-    // env::log(&format!("In guest, fib {} - {}\n", iters, res));
-    // env::commit(&res);
+    zkmain.call(&mut store, ()).expect("Failed to call");
 }

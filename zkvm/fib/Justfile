@@ -4,8 +4,8 @@ build:
 
 # Bypasses the time-consuming proof generation process
 dry-run:
-  RISC0_DEV_MODE=1 ./target/release/fib
+  RISC0_DEV_MODE=1 ./target/release/zkvm-fib -d -n 100
 
 # Real Proof Generation
 full-prove:
-  RISC0_DEV_MODE=0 ./target/release/fib
+  RISC0_DEV_MODE=0 ./target/release/zkvm-fib -n 100

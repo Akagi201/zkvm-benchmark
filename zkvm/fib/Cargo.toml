@@ -1,12 +1,12 @@
 [package]
-name = "fib"
+name = "zkvm-fib"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-hello-world-methods = { path = "methods" }
+fib-methods = { path = "methods" }
 risc0-zkvm = "0.19.1"
-serde = "1.0.193"
+clap = { version = "4.4.11", features = ["derive"] }
 
 [features]
 default = []

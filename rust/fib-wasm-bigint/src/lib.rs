@@ -1,9 +1,10 @@
 use num_bigint::BigUint;
+use num_traits::{One, Zero};
 use wasm_bindgen::prelude::*;
 
 extern "C" {
     pub fn wasm_input(is_public: u32) -> u64;
-    pub fn require(cond: bool);
+    pub fn require(cond: u32);
 }
 
 #[wasm_bindgen]
@@ -13,13 +14,15 @@ pub fn zkmain() {
     let result = fib(input);
     unsafe {
         let expected = wasm_input(0);
-        require(expected == result[0]);
+        if expected != result[0] {
+            require(0);
+        }
     }
 }
 
 pub fn fib(n: u64) -> Vec<u64> {
-    let mut a0: BigUint = BigUint::from(0u64);
-    let mut a1: BigUint = BigUint::from(1u64);
+    let mut a0: BigUint = Zero::zero();
+    let mut a1: BigUint = One::one();
     for _ in 2..=n {
         (a0, a1) = (a1.clone(), (a0 + a1));
     }

@@ -9,19 +9,19 @@ opt:
 
 # dry-run go, bypasses the time-consuming proof generation process
 dry-run-go:
-  RISC0_DEV_MODE=1 ./target/release/wasm -w fib_opt.wasm
+  RISC0_DEV_MODE=1 ./target/release/zkvm-wasm -d -w fib_opt.wasm
 
 # dry-run rust, bypasses the time-consuming proof generation process
 dry-run-rust:
-  RISC0_DEV_MODE=1 ./target/release/wasm -w fib_bg_opt.wasm
+  RISC0_DEV_MODE=1 ./target/release/zkvm-wasm -d -w fib_bg_opt.wasm
 
 # Real Proof Generation Rust
 full-prove-rust:
-  RISC0_DEV_MODE=0 ./target/release/wasm -w fib_bg_opt.wasm
+  RISC0_DEV_MODE=0 ./target/release/zkvm-wasm -w fib_bg_opt.wasm
 
 # Real Proof Generation Go
 full-prove-go:
-  RISC0_DEV_MODE=0 ./target/release/wasm -w fib_opt.wasm
+  RISC0_DEV_MODE=0 ./target/release/zkvm-wasm -w fib_opt.wasm
 
 # clean artifacts
 clean:

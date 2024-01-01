@@ -1,11 +1,10 @@
 [package]
-name = "wasm"
+name = "zkvm-wasm"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
 risc0-zkvm = "0.19.1"
-serde = "1.0.193"
 wasm-methods = { path = "methods" }
 wat = "1.0.71"
 clap = { version = "4.4.11", features = ["derive"] }
